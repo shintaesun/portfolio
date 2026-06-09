@@ -18,6 +18,46 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.about-name').innerHTML = `${PORTFOLIO_DATA.about.name} <span style="font-size: 0.9em; color: var(--text-secondary);">(${PORTFOLIO_DATA.about.birthYear})</span>`;
             document.querySelector('.about-desc').innerHTML = PORTFOLIO_DATA.about.description;
         }
+
+        // Projects (Video) 섹션
+        if (PORTFOLIO_DATA.projects && PORTFOLIO_DATA.projects.length > 0) {
+            const container = document.getElementById('projects-container');
+            if (container) {
+                container.innerHTML = ''; // 기본값 비우기
+                PORTFOLIO_DATA.projects.forEach((proj, index) => {
+                    let embedUrl = proj.videoUrl;
+                    try {
+                        if (embedUrl.includes('youtube.com/watch')) {
+                            const urlObj = new URL(embedUrl.startsWith('http') ? embedUrl : `https://${embedUrl}`);
+                            const videoId = urlObj.searchParams.get('v');
+                            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                        } else if (embedUrl.includes('youtu.be/')) {
+                            const videoId = embedUrl.split('youtu.be/')[1].split('?')[0];
+                            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                        } else if (embedUrl.includes('vimeo.com/') && !embedUrl.includes('player.vimeo.com')) {
+                            const videoId = embedUrl.split('vimeo.com/')[1].split('/')[0].split('?')[0];
+                            embedUrl = `https://player.vimeo.com/video/${videoId}`;
+                        }
+                    } catch(e) { console.error("URL 파싱 에러", e); }
+
+                    const delay = (index + 1) * 0.1;
+                    const card = document.createElement('div');
+                    card.className = 'glass-card project-card reveal';
+                    card.style.setProperty('--delay', `${delay}s`);
+                    
+                    card.innerHTML = `
+                        <div class="project-image">
+                            <iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>${proj.title}</h3>
+                            <p>${proj.description}</p>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
     }
 
     // Scroll Reveal Animation
