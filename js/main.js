@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 설정 파일(config.js)의 데이터로 메인 텍스트 업데이트
     if (typeof PORTFOLIO_DATA !== 'undefined') {
-        document.querySelector('.greeting').innerHTML = PORTFOLIO_DATA.hero.greeting;
-        document.querySelector('.main-title').innerHTML = PORTFOLIO_DATA.hero.title;
-        document.querySelector('.subtitle').innerHTML = PORTFOLIO_DATA.hero.subtitle;
+        // 공통 정보
+        if (PORTFOLIO_DATA.site && document.querySelector('.site-logo')) {
+            document.querySelector('.site-logo').innerHTML = PORTFOLIO_DATA.site.logo;
+        }
+
+        // Hero 섹션
+        if (PORTFOLIO_DATA.hero) {
+            document.querySelector('.greeting').innerHTML = PORTFOLIO_DATA.hero.greeting;
+            document.querySelector('.main-title').innerHTML = PORTFOLIO_DATA.hero.title;
+            document.querySelector('.subtitle').innerHTML = PORTFOLIO_DATA.hero.subtitle;
+        }
+
+        // About 섹션
+        if (PORTFOLIO_DATA.about) {
+            document.querySelector('.about-name').innerHTML = `${PORTFOLIO_DATA.about.name} <span style="font-size: 0.9em; color: var(--text-secondary);">(${PORTFOLIO_DATA.about.birthYear})</span>`;
+            document.querySelector('.about-desc').innerHTML = PORTFOLIO_DATA.about.description;
+        }
     }
 
     // Scroll Reveal Animation
