@@ -19,6 +19,37 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.about-desc').innerHTML = PORTFOLIO_DATA.about.description;
         }
 
+        // Experience 섹션
+        if (PORTFOLIO_DATA.experience && PORTFOLIO_DATA.experience.length > 0) {
+            const expContainer = document.getElementById('experience-container');
+            if (expContainer) {
+                expContainer.innerHTML = '';
+                PORTFOLIO_DATA.experience.forEach((exp, index) => {
+                    const delay = (index + 1) * 0.1;
+                    const item = document.createElement('div');
+                    item.className = 'experience-item reveal';
+                    item.style.setProperty('--delay', `${delay}s`);
+                    
+                    let detailsHtml = '';
+                    if (exp.details && exp.details.length > 0) {
+                        detailsHtml = '<ul class="exp-details">' + exp.details.map(d => `<li>${d}</li>`).join('') + '</ul>';
+                    }
+
+                    item.innerHTML = `
+                        <div class="exp-header">
+                            <div>
+                                <h3 class="exp-company">${exp.company}</h3>
+                                <div class="exp-role">${exp.role}</div>
+                            </div>
+                            <div class="exp-period">${exp.period}</div>
+                        </div>
+                        ${detailsHtml}
+                    `;
+                    expContainer.appendChild(item);
+                });
+            }
+        }
+
         // Projects (Video) 섹션
         if (PORTFOLIO_DATA.projects && PORTFOLIO_DATA.projects.length > 0) {
             const container = document.getElementById('projects-container');
