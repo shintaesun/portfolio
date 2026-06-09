@@ -36,7 +36,14 @@ const PORTFOLIO_DATA = {
             title: "새로운 파트 작업 영상 (제목 입력)",
             description: "추가하실 다른 파트 영상에 대한 설명을 여기에 적어주세요.",
             // ⬇️ 아래에 유튜브나 비메오 주소를 붙여넣기 하세요!
-            videoUrl: "https://vimeo.com/148751763"
+            videoUrl: ""
         }
-    ]
+    ],
+
+    // 4. 연락처(Contact) 정보
+    contact: {
+        message: "새로운 프로젝트 제안이나 애니메이션 작업 문의가 있으시다면 언제든 편하게 연락주세요!",
+        email: "shintaesun00@gmail.com",
+        phone: "+82 10-7262-2623"
+    }
 };

@@ -58,6 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }
+
+        // Contact 섹션
+        if (PORTFOLIO_DATA.contact) {
+            const contactMsg = document.querySelector('.contact-message');
+            if (contactMsg) contactMsg.innerHTML = PORTFOLIO_DATA.contact.message;
+            
+            const contactBtn = document.querySelector('.contact-btn');
+            if (contactBtn) contactBtn.href = `mailto:${PORTFOLIO_DATA.contact.email}`;
+            
+            const contactPhone = document.querySelector('.contact-phone');
+            if (contactPhone) contactPhone.innerHTML = `📞 <a href="tel:${PORTFOLIO_DATA.contact.phone.replace(/ /g, '')}" style="color:var(--text-primary); text-decoration:none;">${PORTFOLIO_DATA.contact.phone}</a>`;
+            
+            const contactEmail = document.querySelector('.contact-email');
+            if (contactEmail) contactEmail.innerHTML = `✉️ <a href="mailto:${PORTFOLIO_DATA.contact.email}" style="color:var(--text-primary); text-decoration:none;">${PORTFOLIO_DATA.contact.email}</a>`;
+        }
     }
 
     // Scroll Reveal Animation
