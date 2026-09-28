@@ -188,13 +188,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const section = document.querySelector(link.getAttribute('href'));
             return section.getBoundingClientRect().top + scrollY;
         });
-        const position = scrollY + innerHeight * 0.35;
+        const position = scrollY;
         let fractionalIndex = 0;
         for (let i = 0; i < centers.length - 1; i++) {
             if (position >= centers[i]) {
                 fractionalIndex = i + Math.max(0, Math.min(1, (position - centers[i]) / (centers[i + 1] - centers[i])));
             }
         }
+        current = railLinks[Math.round(fractionalIndex)];
         const radius = innerHeight * 1.25;
         railLinks.forEach((link, index) => {
             const angle = (index - fractionalIndex) * 0.105;
@@ -202,6 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = innerHeight / 2 + radius * Math.sin(angle);
             const distance = Math.abs(y - innerHeight / 2) / (innerHeight * 0.46);
             const opacity = Math.max(0.5, 1 - distance * 0.55);
+            const focus = Math.max(0, 1 - Math.abs(index - fractionalIndex));
+            const scale = 0.85 + 0.4 * focus * focus * (3 - 2 * focus);
+            link.style.setProperty('--dial-scale', String(scale));
             link.style.left = `${x}px`;
             link.style.top = `${y}px`;
             link.style.setProperty('--dial-opacity', String(opacity));

@@ -731,3 +731,14 @@ main, footer { margin-left: 0; }
     mask-image: none;
     -webkit-mask-image: none;
 }
+
+/* Scroll drives the label size continuously, with no pill behind the text. */
+.rail-link, .rail-link.active, .rail-link:hover, .rail-link:focus-visible {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: translate(-50%, -50%) scale(var(--dial-scale, 0.85));
+}
