@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     card.innerHTML = `
                         <div class="project-image">
-                            <iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe title="${proj.title}" src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="project-info">
                             <h3>${proj.title}</h3>
@@ -55,6 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
                     container.appendChild(card);
+                    if (proj.videoUrl.includes('bvdrne2KpY0')) {
+                        const featured = card.querySelector('iframe').cloneNode(true);
+                        featured.title = '대표 작업 영상';
+                        const video = new URL(featured.src);
+                        const id = video.pathname.split('/').pop();
+                        video.searchParams.set('autoplay', '1');
+                        video.searchParams.set('mute', '1');
+                        video.searchParams.set('loop', '1');
+                        video.searchParams.set('playlist', id);
+                        video.searchParams.set('playsinline', '1');
+                        featured.src = video.toString();
+                        document.getElementById('hero-film').replaceChildren(featured);
+                    }
                 });
             }
         }
@@ -118,10 +131,92 @@ document.addEventListener('DOMContentLoaded', () => {
         navObserver.observe(section);
     });
 
-    // Mobile Menu Toggle (Basic)
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
+});
 
-    mobileBtn.addEventListener('click', () => {
-        alert('모바일 메뉴가 클릭되었습니다. (확장 구현 필요)');
-    });
+// Typography grows toward the viewport center and shrinks toward either edge.
+document.addEventListener('DOMContentLoaded', () => {
+    const elements = [...document.querySelectorAll('.hero-content .greeting, .hero-content .main-title, .hero-content .subtitle, .about .eyebrow, .about .section-title, .experience, .about-card, .skills-card, .projects .eyebrow, .projects .section-title, .project-card, .contact .eyebrow, .contact .section-title, .contact-card')];
+    elements.forEach(el => el.classList.add('scroll-scale'));
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let pending = false;
+    function render() {
+        pending = false;
+        elements.forEach(el => {
+            el.style.transform = 'none';
+            el.style.opacity = '1';
+            if (motion.matches) return;
+            const rect = el.getBoundingClientRect();
+            const center = rect.top + rect.height / 2;
+            const proximity = Math.max(0, 1 - Math.abs(center - innerHeight / 2) / (innerHeight * 0.6));
+            const eased = proximity * proximity * (3 - 2 * proximity);
+            el.style.transform = `scale(${0.7 + 0.3 * eased})`;
+            el.style.opacity = String(0.45 + 0.55 * eased);
+        });
+    }
+    function schedule() {
+        if (!pending) { pending = true; requestAnimationFrame(render); }
+    }
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule);
+    motion.addEventListener('change', schedule);
+    document.fonts.ready.then(schedule);
+    render();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const railLinks = [...document.querySelectorAll('.rail-link')];
+    const rail = document.querySelector('.scroll-rail');
+    let hideTimer;
+    addEventListener('pointermove', event => {
+        rail.classList.toggle('is-near', event.clientX <= 200);
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => rail.classList.remove('is-near'));
+    function showDuringScroll() {
+        rail.classList.add('is-scrolling');
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => rail.classList.remove('is-scrolling'), 850);
+    }
+    let queued = false;
+    function updateRail() {
+        queued = false;
+        let current = railLinks[0];
+        railLinks.forEach(link => {
+            const section = document.querySelector(link.getAttribute('href'));
+            if (section.getBoundingClientRect().top <= innerHeight * 0.5) current = link;
+        });
+        const centers = railLinks.map(link => {
+            const section = document.querySelector(link.getAttribute('href'));
+            return section.getBoundingClientRect().top + scrollY;
+        });
+        const position = scrollY + innerHeight * 0.35;
+        let fractionalIndex = 0;
+        for (let i = 0; i < centers.length - 1; i++) {
+            if (position >= centers[i]) {
+                fractionalIndex = i + Math.max(0, Math.min(1, (position - centers[i]) / (centers[i + 1] - centers[i])));
+            }
+        }
+        const radius = innerHeight * 1.25;
+        railLinks.forEach((link, index) => {
+            const angle = (index - fractionalIndex) * 0.105;
+            const x = 112 - radius * (1 - Math.cos(angle));
+            const y = innerHeight / 2 + radius * Math.sin(angle);
+            const distance = Math.abs(y - innerHeight / 2) / (innerHeight * 0.46);
+            const opacity = Math.max(0.5, 1 - distance * 0.55);
+            link.style.left = `${x}px`;
+            link.style.top = `${y}px`;
+            link.style.setProperty('--dial-opacity', String(opacity));
+            link.classList.toggle('active', link === current);
+            if (link === current) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+        });
+    }
+    function scheduleRail() {
+        if (!queued) { queued = true; requestAnimationFrame(updateRail); }
+    }
+    addEventListener('scroll', () => {
+        showDuringScroll();
+        scheduleRail();
+    }, { passive: true });
+    addEventListener('resize', scheduleRail);
+    updateRail();
 });

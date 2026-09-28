@@ -10,35 +10,35 @@ const PORTFOLIO_DATA = {
 
     // 1. 메인 화면(Hero) 텍스트
     hero: {
-        greeting: "Hello, I'm 신태선 👋",
+        greeting: "신태선 · Senior 3D Animator",
         // 문구가 너무 길면 어색할 수 있어 2줄로 간결하게 수정했습니다.
-        title: "캐릭터에 생명력을 불어넣는<br><span class='gradient-text'>3D Animator.</span>",
-        subtitle: "11년 차 시니어 애니메이터로서, 영상의 흐름을 읽고 완벽한 리듬의 움직임을 만들어냅니다."
+        title: "움직임에 생명을.<br><span class='gradient-text'>장면에 이야기를.</span>",
+        subtitle: "캐릭터의 감정부터 장면의 리듬까지.<br>이야기에 어울리는 움직임을 만듭니다."
     },
 
     // 2. 내 소개(About) 텍스트
     about: {
         name: "신태선",
         birthYear: "1990년생",
-        description: "애니메이터로서 가장 중요하게 생각하는 것은 '현재의 컷이 전체 영상에서 어떤 역할을 해야 하는가'를 정확히 파악하는 것입니다.<br><br>단순히 캐릭터를 자연스럽게 움직이는 기술적 단계를 넘어, 연출 의도와 앞뒤 장면의 맥락을 고려해 최적의 리듬을 찾아냅니다. 11년 이상 쌓아온 이 감각은 작업 효율을 높이고 결과물의 안정성을 확보하는 저만의 강점입니다.<br><br>팀 전체의 흐름을 조율하는 시니어 애니메이터로서 든든한 파트너가 되겠습니다."
+        description: "<strong>자연스러운 움직임을 넘어,<br>장면에 필요한 연기를 만듭니다.</strong><br><br>12년 차 애니메이터로서 쌓아온 경험으로 연출 의도와 앞뒤 장면의 맥락을 읽고, 캐릭터에 맞는 리듬을 찾아냅니다.<br><br>팀의 작업 흐름을 함께 조율하며 완성도 있는 결과를 만드는 시니어 애니메이터입니다."
     },
 
     // 3. 포트폴리오 영상 프로젝트 (첫 번째 쇼릴 영상 삭제 완료)
     projects: [
         {
-            title: "Animation Portfolio 1",
+            title: "Animation Portfolio",
+            description: "첫 단편영화 제작 작업입니다. 캐릭터의 움직임과 장면의 흐름을 통해 이야기를 전하는 작품입니다.",
+            videoUrl: "https://youtu.be/k8Fo8Ur8ZTE"
+        },
+        {
+            title: "Animation Portfolio",
             description: "주요 게임 시네마틱 및 캐릭터 애니메이션 작업물 모음입니다.",
-            videoUrl: "https://youtu.be/lRzlDQyRKyU"
-        },
-        {
-            title: "Animation Portfolio 2",
-            description: "모션 캡처 활용 및 역동적인 액션 연출 중심의 작업물입니다.",
-            videoUrl: "https://www.youtube.com/watch?v=kvjKOCQoVMQ"
-        },
-        {
-            title: "Animation Portfolio 3",
-            description: "다양한 스타일의 3D 애니메이션 릴입니다.",
             videoUrl: "https://youtu.be/bvdrne2KpY0"
+        },
+        {
+            title: "Animation Portfolio",
+            description: "차량 및 제품·상품 소개 영상 작업물 모음입니다.",
+            videoUrl: "https://youtu.be/lRzlDQyRKyU"
         }
     ],
 

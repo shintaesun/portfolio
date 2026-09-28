@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="모던 프리미엄 개인 포트폴리오 웹사이트">
-    <title>포트폴리오 | 안녕하세요</title>
+    <title>신태선 — 3D Animator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=hover-film-13">
     <!-- Vercel Web Analytics (방문자 통계) -->
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -19,28 +19,21 @@
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
-    <header class="glass-nav">
-        <div class="nav-container">
-            <a href="#home" class="logo site-logo">S</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <button class="mobile-menu-btn" aria-label="메뉴 열기">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
 
+
+    <nav class="scroll-rail" aria-label="섹션 이동">
+        <svg viewBox="0 0 120 360" preserveAspectRatio="none" aria-hidden="true"><path d="M-65 -20 A205 205 0 0 1 -65 380" /></svg>
+        <span class="dial-indicator" aria-hidden="true"></span>
+        <a href="#home" class="rail-link rail-home" aria-label="홈">S</a>
+        <a href="#about" class="rail-link">About</a>
+        <a href="#projects" class="rail-link">Projects</a>
+        <a href="#contact" class="rail-link">Contact</a>
+    </nav>
     <main>
         <section id="home" class="hero">
+            <div class="hero-film"><div class="hero-film-frame" id="hero-film"></div><div class="film-caption"><span>FEATURED / ANIMATION PORTFOLIO</span><a href="#projects">전체 작업 보기 ↗</a></div></div>
             <div class="hero-content reveal">
+                <p class="eyebrow">SHIN TAESUN · ANIMATION PORTFOLIO</p>
                 <h2 class="greeting">Hello, World! 👋</h2>
                 <h1 class="main-title">창의적인 아이디어를<br><span class="gradient-text">코드로 구현하는</span> 개발자.</h1>
                 <p class="subtitle">새로운 기술을 배우고 사용자에게 직관적이고 아름다운 경험을 제공하는 것을 좋아합니다.</p>
@@ -49,11 +42,13 @@
                     <a href="#contact" class="btn btn-secondary">연락하기</a>
                 </div>
             </div>
+
         </section>
 
         <section id="about" class="about">
             <div class="section-container">
-                <h2 class="section-title reveal">About Me</h2>
+                <h2 class="section-title reveal">움직임에 맥락을 담습니다.</h2>
+                <div class="experience"><strong>12</strong><span>12년 차<br>시니어 3D 애니메이터</span></div>
                 <div class="about-grid reveal">
                     <div class="glass-card about-card">
                         <h3 class="about-name">Who I am</h3>
@@ -62,12 +57,13 @@
                     <div class="glass-card skills-card">
                         <h3>Tools & Skills</h3>
                         <div class="skills-tags">
-                            <span class="tag">Autodesk Maya</span>
-                            <span class="tag">Blender</span>
-                            <span class="tag">3ds Max</span>
-                            <span class="tag">Unreal Engine</span>
-                            <span class="tag">Unity</span>
                             <span class="tag">Character Animation</span>
+                            <span class="tag">Autodesk Maya</span>
+                            <span class="tag">After Effects</span>
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">Rigging</span>
+                            <span class="tag">Layout</span>
+                            <span class="tag">Previsualization</span>
                         </div>
                     </div>
                 </div>
@@ -76,7 +72,7 @@
 
         <section id="projects" class="projects">
             <div class="section-container">
-                <h2 class="section-title reveal">Featured Projects</h2>
+                <h2 class="section-title reveal">Selected works<span class="title-dot">.</span></h2>
                 <!-- 영상 리스트는 js/config.js와 main.js에서 동적으로 생성됩니다. -->
                 <div class="projects-grid" id="projects-container">
                 </div>
@@ -85,7 +81,7 @@
 
         <section id="contact" class="contact">
             <div class="section-container">
-                <h2 class="section-title reveal">Get In Touch</h2>
+                <h2 class="section-title reveal">다음 장면을 함께 만들어요<span class="title-dot">.</span></h2>
                 <div class="glass-card contact-card reveal">
                     <p class="contact-message">새로운 프로젝트 제안이나 궁금한 점이 있으시다면 언제든 편하게 연락주세요!</p>
                     
@@ -105,7 +101,7 @@
     </footer>
 
     <!-- 텍스트 수정용 설정 파일 -->
-    <script src="js/config.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/config.js?v=hover-film-13"></script>
+    <script src="js/main.js?v=hover-film-13"></script>
 </body>
 </html>

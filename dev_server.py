@@ -158,7 +158,7 @@ class ThreadingHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
 
 def start_server():
     ThreadingHTTPServer.allow_reuse_address = True
-    with ThreadingHTTPServer(("", PORT), LiveReloadHandler) as httpd:
+    with ThreadingHTTPServer(("127.0.0.1", PORT), LiveReloadHandler) as httpd:
         print(f"Serving at http://localhost:{PORT}")
         try:
             httpd.serve_forever()
