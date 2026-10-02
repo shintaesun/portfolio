@@ -20,23 +20,26 @@ const PORTFOLIO_DATA = {
     about: {
         name: "신태선",
         birthYear: "1990년생",
-        description: "<strong>자연스러운 움직임을 넘어,<br>장면에 필요한 연기를 만듭니다.</strong><br><br>12년 차 애니메이터로서 쌓아온 경험으로 연출 의도와 앞뒤 장면의 맥락을 읽고, 캐릭터에 맞는 리듬을 찾아냅니다.<br><br>팀의 작업 흐름을 함께 조율하며 완성도 있는 결과를 만드는 시니어 애니메이터입니다."
+        description: "<strong>자연스러운 움직임을 넘어,<br>장면에 필요한 연기를 만듭니다.</strong><br><br>게임 시네마틱부터 단편영화, 제품 영상까지. 다양한 작업에서 쌓아온 경험으로 연출 의도와 앞뒤 장면의 맥락을 읽고, 캐릭터에 맞는 리듬을 찾아냅니다.<br><br>팀의 작업 흐름을 함께 조율하며 완성도 있는 결과를 만드는 시니어 애니메이터입니다."
     },
 
     // 3. 포트폴리오 영상 프로젝트 (첫 번째 쇼릴 영상 삭제 완료)
     projects: [
         {
-            title: "Animation Portfolio",
+            title: "White Hare",
+            category: "Animated Short Film",
             description: "첫 단편영화 제작 작업입니다. 캐릭터의 움직임과 장면의 흐름을 통해 이야기를 전하는 작품입니다.",
             videoUrl: "https://youtu.be/k8Fo8Ur8ZTE"
         },
         {
-            title: "Animation Portfolio",
+            title: "Game Cinematics",
+            category: "Character Animation Reel",
             description: "주요 게임 시네마틱 및 캐릭터 애니메이션 작업물 모음입니다.",
             videoUrl: "https://youtu.be/bvdrne2KpY0"
         },
         {
-            title: "Animation Portfolio",
+            title: "Product & Automotive",
+            category: "Commercial Animation",
             description: "차량 및 제품·상품 소개 영상 작업물 모음입니다.",
             videoUrl: "https://youtu.be/lRzlDQyRKyU"
         }
@@ -44,7 +47,7 @@ const PORTFOLIO_DATA = {
 
     // 4. 연락처(Contact) 정보
     contact: {
-        message: "새로운 프로젝트 제안이나 애니메이션 작업 문의가 있으시다면 언제든 편하게 연락주세요!",
+        message: "프로젝트 제안과 애니메이션 작업 문의를 기다립니다.",
         email: "shintaesun00@gmail.com",
         phone: "+82 10-7262-2623"
     }

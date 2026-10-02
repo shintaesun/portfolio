@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // About 섹션
         if (PORTFOLIO_DATA.about) {
-            document.querySelector('.about-name').innerHTML = `${PORTFOLIO_DATA.about.name} <span style="font-size: 0.9em; color: var(--text-secondary);">(${PORTFOLIO_DATA.about.birthYear})</span>`;
+            document.querySelector('.about-name').textContent = PORTFOLIO_DATA.about.name;
             document.querySelector('.about-desc').innerHTML = PORTFOLIO_DATA.about.description;
         }
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <iframe title="${proj.title}" src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="project-info">
-                            <h3>${proj.title}</h3>
+                            <div><p class="project-category">${proj.category}</p><h3>${proj.title}</h3></div>
                             <p>${proj.description}</p>
                         </div>
                     `;
@@ -81,10 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (contactBtn) contactBtn.href = `mailto:${PORTFOLIO_DATA.contact.email}`;
             
             const contactPhone = document.querySelector('.contact-phone');
-            if (contactPhone) contactPhone.innerHTML = `📞 <a href="tel:${PORTFOLIO_DATA.contact.phone.replace(/ /g, '')}" style="color:var(--text-primary); text-decoration:none;">${PORTFOLIO_DATA.contact.phone}</a>`;
+            if (contactPhone) contactPhone.innerHTML = `<span class="contact-label">PHONE</span> <a href="tel:${PORTFOLIO_DATA.contact.phone.replace(/ /g, '')}" style="color:var(--text-primary); text-decoration:none;">${PORTFOLIO_DATA.contact.phone}</a>`;
             
             const contactEmail = document.querySelector('.contact-email');
-            if (contactEmail) contactEmail.innerHTML = `✉️ <a href="mailto:${PORTFOLIO_DATA.contact.email}" style="color:var(--text-primary); text-decoration:none;">${PORTFOLIO_DATA.contact.email}</a>`;
+            if (contactEmail) contactEmail.innerHTML = `<span class="contact-label">EMAIL</span> <a href="mailto:${PORTFOLIO_DATA.contact.email}" style="color:var(--text-primary); text-decoration:none;">${PORTFOLIO_DATA.contact.email}</a>`;
         }
     }
 
@@ -133,24 +133,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// Typography grows toward the viewport center and shrinks toward either edge.
+// Reserve scroll scaling for headlines; reading and video surfaces remain stable.
 document.addEventListener('DOMContentLoaded', () => {
-    const elements = [...document.querySelectorAll('.hero-content .greeting, .hero-content .main-title, .hero-content .subtitle, .about .eyebrow, .about .section-title, .experience, .about-card, .skills-card, .projects .eyebrow, .projects .section-title, .project-card, .contact .eyebrow, .contact .section-title, .contact-card')];
+    const elements = [...document.querySelectorAll('.main-title, .section-title')];
     elements.forEach(el => el.classList.add('scroll-scale'));
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobile = matchMedia('(max-width: 768px)');
     let pending = false;
     function render() {
         pending = false;
-        elements.forEach(el => {
-            el.style.transform = 'none';
-            el.style.opacity = '1';
-            if (motion.matches) return;
-            const rect = el.getBoundingClientRect();
-            const center = rect.top + rect.height / 2;
-            const proximity = Math.max(0, 1 - Math.abs(center - innerHeight / 2) / (innerHeight * 0.6));
+        elements.forEach(el => { el.style.transform = 'none'; });
+        const boxes = elements.map(el => el.getBoundingClientRect());
+        elements.forEach((el, i) => {
+            if (motion.matches || mobile.matches) return;
+            const center = boxes[i].top + boxes[i].height / 2;
+            const proximity = Math.max(0, 1 - Math.abs(center - innerHeight / 2) / (innerHeight * 0.7));
             const eased = proximity * proximity * (3 - 2 * proximity);
-            el.style.transform = `scale(${0.7 + 0.3 * eased})`;
-            el.style.opacity = String(0.45 + 0.55 * eased);
+            const minimum = el.matches('.main-title') ? 0.88 : 0.96;
+            el.style.transform = `scale(${minimum + (1 - minimum) * eased})`;
         });
     }
     function schedule() {
@@ -195,21 +195,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 fractionalIndex = i + Math.max(0, Math.min(1, (position - centers[i]) / (centers[i + 1] - centers[i])));
             }
         }
+        if (scrollY + innerHeight >= document.documentElement.scrollHeight - 4) fractionalIndex = railLinks.length - 1;
         current = railLinks[Math.round(fractionalIndex)];
+        const compact = innerWidth <= 768;
         const radius = innerHeight * 1.25;
         railLinks.forEach((link, index) => {
             const angle = (index - fractionalIndex) * 0.105;
-            const x = 112 - radius * (1 - Math.cos(angle));
-            const y = innerHeight / 2 + radius * Math.sin(angle);
+            const x = (compact ? 42 : 82) - radius * (1 - Math.cos(angle));
+            const y = compact ? 110 + (index - fractionalIndex) * 46 : innerHeight / 2 + radius * Math.sin(angle);
             const distance = Math.abs(y - innerHeight / 2) / (innerHeight * 0.46);
             const opacity = Math.max(0.5, 1 - distance * 0.55);
             const focus = Math.max(0, 1 - Math.abs(index - fractionalIndex));
-            const scale = 0.85 + 0.4 * focus * focus * (3 - 2 * focus);
+            const scale = 0.9 + 0.2 * focus * focus * (3 - 2 * focus);
             link.style.setProperty('--dial-scale', String(scale));
             link.style.left = `${x}px`;
             link.style.top = `${y}px`;
             link.style.setProperty('--dial-opacity', String(opacity));
             link.classList.toggle('active', link === current);
+            link.classList.toggle('dial-adjacent', Math.abs(index - fractionalIndex) <= 1.1);
             if (link === current) link.setAttribute('aria-current', 'location');
             else link.removeAttribute('aria-current');
         });

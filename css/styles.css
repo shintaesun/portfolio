@@ -742,3 +742,70 @@ main, footer { margin-left: 0; }
     -webkit-backdrop-filter: none;
     transform: translate(-50%, -50%) scale(var(--dial-scale, 0.85));
 }
+
+/* Portfolio refinement: stable media, readable copy, and responsive navigation. */
+.hero-film-stage { position: relative; }
+.film-identity, .film-scroll { position: absolute; z-index: 2; color: #fff; text-shadow: 0 1px 12px #000; }
+.film-identity { top: 32px; left: 40px; font-size: 14px; font-weight: 700; letter-spacing: .16em; }
+.film-identity span { display: block; font-size: 10px; margin-top: 7px; letter-spacing: .13em; }
+.film-scroll { bottom: 30px; left: 40px; text-decoration: none; font-size: 12px; letter-spacing: .06em; padding: 12px 0; }
+.film-scroll span { margin-left: 14px; }
+.hero-content, .section-container { padding-left: 184px; padding-right: 48px; }
+.hero-content { min-height: 72vh; }
+.section-title { word-break: keep-all; text-wrap: balance; }
+.section-title span { white-space: nowrap; }
+.about-grid { grid-template-columns: 1.4fr 1fr; gap: 72px; }
+.about-card, .skills-card { padding-top: 24px; }
+.skill-group { margin-top: 24px; }
+.skill-group h4 { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #596579; }
+.skill-group .skills-tags { margin-top: 8px; }
+.about-desc, .project-info p { color: #485366; font-size: 17px; line-height: 1.8; word-break: keep-all; }
+.projects-grid { gap: 80px; }
+.project-info { grid-template-columns: 1fr 1.15fr; gap: 40px; padding-top: 24px; }
+.project-info .project-category { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px; color: #596579; }
+.project-card.reveal, .contact-card.reveal, .about-grid.reveal { opacity: 1; transform: none; transition: none; }
+.project-card.reveal::before, .contact-card.reveal::before { display: none; }
+.scroll-rail { width: 148px; }
+.scroll-rail::before { right: 66px; }
+.rail-link { font-size: 13px; padding: 12px 8px; }
+.rail-home { font-size: 26px; }
+.scroll-rail:not(.is-scrolling):not(.is-near):not(:focus-within) { opacity: .25; }
+.scroll-rail:not(.is-scrolling):not(.is-near):not(:focus-within) .rail-link,
+.scroll-rail:not(.is-scrolling):not(.is-near):not(:focus-within)::before { opacity: 0; }
+.contact-card { max-width: 720px; }
+.contact-card p { word-break: keep-all; }
+.contact-label { display: inline-block; width: 64px; color: #596579; font-size: 10px; font-weight: 600; letter-spacing: .1em; vertical-align: middle; }
+.contact-btn, .contact-btn:hover { box-shadow: none; border-radius: 8px; }
+a:focus-visible { outline: 2px solid #2563eb; outline-offset: 5px; }
+footer { font-size: 12px; letter-spacing: .04em; padding: 32px 24px; }
+@media (max-width: 768px) {
+    .hero-content, .section-container { padding-left: 24px; padding-right: 24px; }
+    .hero-content { min-height: 64vh; padding-top: 72px; padding-bottom: 72px; }
+    .main-title { font-size: clamp(1.8rem, 8.4vw, 3.5rem); overflow-wrap: normal; word-break: keep-all; }
+    .section-title { font-size: clamp(1.8rem, 7.5vw, 2.6rem); }
+    .about .section-title span { display: block; }
+    .about-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .about { margin-top: 0; }
+    .about-card, .skills-card { padding-top: 8px; }
+    .skills-card { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .skills-card > h3 { grid-column: 1 / -1; }
+    .skill-group { margin-top: 0; }
+    .tag { font-size: 14px; }
+    .about-desc, .project-info p { font-size: 16px; }
+    .project-info { grid-template-columns: minmax(0, 1fr); gap: 12px; padding-top: 20px; }
+    .projects-grid { gap: 56px; }
+    .film-identity { left: 24px; top: 24px; }
+    .film-scroll { left: 24px; bottom: 24px; }
+    .film-caption { font-size: 9px; letter-spacing: .03em; gap: 8px; }
+    /* A compact left dial leaves the reading column at full width. */
+    .scroll-rail { left: 0; right: auto; width: 84px; height: 220px; top: auto; bottom: 16px; overflow: hidden; }
+    .scroll-rail::before { width: 400px; height: 400px; top: -90px; right: 40px; opacity: .25; }
+    .scroll-rail .rail-link { font-size: 10px; padding: 14px 4px; }
+    .scroll-rail .rail-home { font-size: 18px; }
+    .scroll-rail .rail-link:not(.active) { opacity: 0; pointer-events: none; }
+    .scroll-rail:focus-within .rail-link { opacity: 1; pointer-events: auto; }
+    .dial-indicator { left: auto; right: 4px; width: 8px; }
+    .contact-info-box { font-size: 1rem !important; }
+    .contact-label { display: block; margin-bottom: 4px; }
+    .reveal::before { display: none; }
+}
